@@ -4,3 +4,5 @@ from .shellstrategy import ShellStrategy
 from .ubootstrategy import UBootStrategy
 from .graphstrategy import *
 from .dockerstrategy import DockerStrategy
+from .bootstrapstrategy import BootstrapStrategy
+from .powerstrategy import PowerStrategy
