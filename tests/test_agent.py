@@ -110,6 +110,9 @@ def test_all_modules():
     methods = aw.list()
     assert 'sysfsgpio.set' in methods
     assert 'sysfsgpio.get' in methods
+    aw.load('rkusbmaskrom')
+    methods = aw.list()
+    assert 'rkusbmaskrom.load' in methods
     aw.load('usb_hid_relay')
     methods = aw.list()
     assert 'usb_hid_relay.set' in methods
@@ -118,4 +121,4 @@ def test_all_modules():
 def test_import_modules():
     import labgrid.util.agents
     import labgrid.util.agents.dummy
-    from labgrid.util.agents import deditec_relais8, linkpismarthub, sysfsgpio
+    from labgrid.util.agents import deditec_relais8, linkpismarthub, rkusbmaskrom, sysfsgpio
