@@ -126,21 +126,22 @@ def test_local_fdpass():
         assert fdpath.startswith("/memfd:test_fd")
 
 
-@pytest.mark.parametrize('module_name', [
-    'deditec_relais8',
-    'linkpismarthub',
-    'sysfsgpio',
-    'usb_hid_relay'
+@pytest.mark.parametrize('module_name,methods', [
+    ('deditec_relais8', ['set', 'get']),
+    ('linkpismarthub', ['set', 'get']),
+    ('rkusbmaskrom', ['load']),
+    ('sysfsgpio', ['set', 'get']),
+    ('usb_hid_relay', ['set', 'get']),
 ])
-def test_all_modules(module_name: str) -> None:
+def test_all_modules(module_name, methods) -> None:
     aw = AgentWrapper(None)
 
     aw.load(module_name)
-    methods = aw.list()
-    assert f'{module_name}.set' in methods
-    assert f'{module_name}.get' in methods
+    exports = aw.list()
+    for method in methods:
+        assert f'{module_name}.{method}' in exports
 
 def test_import_modules():
     import labgrid.util.agents
     import labgrid.util.agents.dummy
-    from labgrid.util.agents import deditec_relais8, linkpismarthub, sysfsgpio
+    from labgrid.util.agents import deditec_relais8, linkpismarthub, rkusbmaskrom, sysfsgpio
